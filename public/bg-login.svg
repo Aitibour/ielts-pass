@@ -1,0 +1,47 @@
+<svg width="1440" height="1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="loginGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#012269"/>
+      <stop offset="40%" stop-color="#011F65"/>
+      <stop offset="100%" stop-color="#001a4d"/>
+    </linearGradient>
+    <radialGradient id="loginGlow1" cx="30%" cy="20%">
+      <stop offset="0%" stop-color="#046bd2" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="loginGlow2" cx="70%" cy="80%">
+      <stop offset="0%" stop-color="#0A8C51" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="loginGlow3" cx="90%" cy="20%">
+      <stop offset="0%" stop-color="#C8102F" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="loginDots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="1" fill="white" opacity="0.06"/>
+    </pattern>
+    <pattern id="loginGrid" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M100 0H0v100" fill="none" stroke="white" stroke-width="0.4" opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1440" height="1024" fill="url(#loginGrad)"/>
+  <rect width="1440" height="1024" fill="url(#loginGlow1)"/>
+  <rect width="1440" height="1024" fill="url(#loginGlow2)"/>
+  <rect width="1440" height="1024" fill="url(#loginGlow3)"/>
+  <rect width="1440" height="1024" fill="url(#loginDots)"/>
+  <rect width="1440" height="1024" fill="url(#loginGrid)"/>
+  <!-- Floating shapes -->
+  <circle cx="150" cy="800" r="250" fill="white" opacity="0.015"/>
+  <circle cx="1300" cy="150" r="350" fill="white" opacity="0.02"/>
+  <circle cx="600" cy="500" r="180" fill="#046bd2" opacity="0.04"/>
+  <ellipse cx="900" cy="300" rx="400" ry="200" fill="white" opacity="0.01"/>
+  <!-- Book shapes -->
+  <rect x="100" y="300" width="60" height="80" rx="4" fill="white" opacity="0.02" transform="rotate(15 130 340)"/>
+  <rect x="1300" y="700" width="80" height="100" rx="6" fill="white" opacity="0.025" transform="rotate(-10 1340 750)"/>
+  <rect x="1200" y="400" width="50" height="65" rx="3" fill="white" opacity="0.02" transform="rotate(25 1225 432)"/>
+  <!-- Pencil shape -->
+  <rect x="300" y="150" width="8" height="60" rx="2" fill="white" opacity="0.03" transform="rotate(-30 304 180)"/>
+  <!-- Abstract lines -->
+  <line x1="0" y1="700" x2="500" y2="900" stroke="white" stroke-width="0.5" opacity="0.03"/>
+  <line x1="1000" y1="0" x2="1440" y2="300" stroke="white" stroke-width="0.5" opacity="0.03"/>
+</svg>

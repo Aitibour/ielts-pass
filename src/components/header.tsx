@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 const navItems = [
+  { label: "Home", href: "/home", icon: BookOpen },
   { label: "Reading", href: "/ielts", icon: BookOpen },
   { label: "Listening", href: "/ielts/listening", icon: Headphones },
   { label: "Writing Task 1", href: "/ielts/writing", icon: FilePenLine },
@@ -26,7 +27,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 lg:px-8">
-        <Link href="/" className="flex items-center gap-2.5">
+        <Link href="/home" className="flex items-center gap-2.5">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-dark">
             <BookOpen className="h-5 w-5 text-white" />
           </div>

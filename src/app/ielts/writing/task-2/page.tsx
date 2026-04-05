@@ -115,13 +115,13 @@ export default function IeltsWritingTask2Page() {
   const wordCount = countWords(essay);
 
   return (
-    <main className="flex-1 bg-gray-50">
+    <main className="flex-1 bg-[url('/bg-pattern.svg')] bg-cover bg-fixed bg-center bg-no-repeat">
       {/* Page Header */}
-      <section className="border-b border-gray-200 bg-white">
+      <section className="border-b border-gray-200 bg-white/90 backdrop-blur">
         <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
             <Link
-              href="/"
+              href="/home"
               className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-1.5 font-medium text-gray-700 transition hover:bg-gray-50"
             >
               <ArrowLeft className="h-4 w-4" />

@@ -1,289 +1,218 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import {
-  ArrowRight,
-  Award,
   BookOpen,
-  Calculator,
-  CheckCircle2,
-  FilePenLine,
-  Headphones,
-  NotebookPen,
-  Target,
-  Timer,
-  TrendingUp,
-  Zap,
+  Eye,
+  EyeOff,
+  Lock,
+  LogIn,
+  Mail,
+  UserPlus,
 } from "lucide-react";
 
-const modules = [
-  {
-    title: "Reading Simulator",
-    description:
-      "Practice with a real General Reading paper. 40 questions, 60-minute countdown, and instant band score calculation.",
-    href: "/ielts",
-    icon: BookOpen,
-    color: "bg-primary",
-    lightBg: "bg-primary-light",
-    tag: "Reading",
-  },
-  {
-    title: "Listening Practice",
-    description:
-      "6 full listening tests with original audio, question PDFs, and answer keys sourced from IELTS Fever.",
-    href: "/ielts/listening",
-    icon: Headphones,
-    color: "bg-ielts-listening",
-    lightBg: "bg-purple-50",
-    tag: "Listening",
-  },
-  {
-    title: "Writing Task 1",
-    description:
-      "General Training letter-writing prompts with a 20-minute timer, live word counter, and browser auto-save.",
-    href: "/ielts/writing",
-    icon: FilePenLine,
-    color: "bg-accent",
-    lightBg: "bg-accent-light",
-    tag: "Writing",
-  },
-  {
-    title: "Writing Task 2",
-    description:
-      "Essay prompts for General Training Task 2 with a 40-minute timer and 250-word minimum target.",
-    href: "/ielts/writing/task-2",
-    icon: NotebookPen,
-    color: "bg-ielts-green",
-    lightBg: "bg-emerald-50",
-    tag: "Writing",
-  },
-  {
-    title: "Score Calculator",
-    description:
-      "Enter raw scores for all four modules and get your estimated overall IELTS band instantly.",
-    href: "/ielts/calculator",
-    icon: Calculator,
-    color: "bg-navy",
-    lightBg: "bg-slate-50",
-    tag: "Tools",
-  },
-];
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [name, setName] = useState("");
 
-const features = [
-  {
-    icon: Timer,
-    title: "Timed Practice",
-    description: "Real exam conditions with countdown timers for every module.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Instant Marking",
-    description:
-      "Submit your answers and see results immediately with band score mapping.",
-  },
-  {
-    icon: Target,
-    title: "Real Test Papers",
-    description:
-      "Practice with authentic IELTS materials sourced from trusted resources.",
-  },
-  {
-    icon: Zap,
-    title: "Auto-Save",
-    description:
-      "Your progress is saved in your browser. Pick up right where you left off.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Band Calculation",
-    description:
-      "Official IELTS band score conversion tables for accurate results.",
-  },
-  {
-    icon: Award,
-    title: "All 4 Modules",
-    description:
-      "Reading, Listening, Writing, and Speaking score tracking in one place.",
-  },
-];
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    window.location.href = "/home";
+  }
 
-export default function HomePage() {
   return (
-    <main className="flex-1">
-      {/* Hero Section */}
-      <section className="gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0aDR2MmgtNHYtMnptMC04aDR2Mmg0di0yem0wIDh2LTRoMnY0aC0yem0tOC04aDR2Mmg0di0yeiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
-        <div className="relative mx-auto max-w-7xl px-4 py-24 lg:px-8 lg:py-36">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur">
-              <Award className="h-4 w-4" />
-              Free IELTS General Training Platform
-            </div>
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Ace Your IELTS
-              <br />
-              <span className="text-red-300">General Training</span> Exam
-            </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
-              Practice reading, listening, and writing with real test materials.
-              Timed exercises, instant marking, and band score calculation — all
-              completely free.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href="/ielts"
-                className="inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-red-900/30 transition hover:bg-accent-dark"
-              >
-                Start Practicing
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/ielts/calculator"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-base font-semibold text-white backdrop-blur transition hover:bg-white/20"
-              >
-                Score Calculator
-              </Link>
-            </div>
-          </div>
+    <main className="relative flex min-h-[calc(100vh-72px)] flex-1 items-center justify-center overflow-hidden">
+      {/* Full-page background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/bg-login.svg')" }}
+      />
 
-          {/* Stats badges */}
-          <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:max-w-3xl">
-            {[
-              { label: "Practice Tests", value: "10+" },
-              { label: "Writing Prompts", value: "16" },
-              { label: "Listening Tests", value: "6" },
-              { label: "100% Free", value: "$0" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl bg-white/10 px-5 py-4 backdrop-blur"
-              >
-                <div className="text-2xl font-extrabold text-white">
-                  {stat.value}
-                </div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wider text-white/60">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Animated floating orbs */}
+      <div className="absolute left-[10%] top-[20%] h-72 w-72 rounded-full bg-primary/20 blur-[100px]" />
+      <div className="absolute bottom-[10%] right-[15%] h-96 w-96 rounded-full bg-ielts-green/15 blur-[120px]" />
+      <div className="absolute right-[30%] top-[10%] h-48 w-48 rounded-full bg-accent/10 blur-[80px]" />
 
-      {/* Practice Modules */}
-      <section className="bg-gray-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              <BookOpen className="h-3.5 w-3.5" />
-              Practice Modules
-            </div>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Everything You Need to Prepare
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-gray-500">
-              Five focused modules covering all IELTS General Training skills.
-              Each module includes real test materials, timers, and instant
-              results.
-            </p>
+      <div className="relative z-10 mx-auto w-full max-w-md px-4 py-12">
+        {/* Logo */}
+        <div className="mb-8 text-center">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur">
+            <BookOpen className="h-8 w-8 text-white" />
           </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {modules.map((mod) => (
-              <Link
-                key={mod.href}
-                href={mod.href}
-                className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-7 shadow-card transition duration-300 hover:border-gray-300 hover:shadow-card-hover"
-              >
-                <div className="flex items-start justify-between">
-                  <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl ${mod.color} text-white shadow-lg`}
-                  >
-                    <mod.icon className="h-6 w-6" />
-                  </div>
-                  <span
-                    className={`rounded-full ${mod.lightBg} px-3 py-1 text-xs font-semibold text-gray-600`}
-                  >
-                    {mod.tag}
-                  </span>
-                </div>
-                <h3 className="mt-5 text-lg font-bold text-gray-900 group-hover:text-primary">
-                  {mod.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  {mod.description}
-                </p>
-                <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-primary opacity-0 transition group-hover:opacity-100">
-                  Start now
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Grid */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-              <Zap className="h-3.5 w-3.5" />
-              Platform Features
-            </div>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Built for Real IELTS Success
-            </h2>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <div
-                key={feature.title}
-                className="rounded-3xl border border-gray-100 bg-gray-50 p-7 transition hover:border-gray-200 hover:bg-white hover:shadow-card"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-white">
-                  <feature.icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 text-base font-bold text-gray-900">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="gradient-navy">
-        <div className="mx-auto max-w-7xl px-4 py-20 text-center lg:px-8">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Ready to Start Preparing?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-white/65">
-            Jump straight into practice with real IELTS General Training
-            materials. No sign-up required.
+          <h1 className="mt-4 text-3xl font-extrabold tracking-tight text-white">
+            IELTS <span className="text-red-400">PASS</span>
+          </h1>
+          <p className="mt-2 text-sm text-white/60">
+            Free IELTS General Training Practice Platform
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/ielts"
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-3.5 text-base font-semibold text-white shadow-lg transition hover:bg-accent-dark"
+        </div>
+
+        {/* Login Card */}
+        <div className="rounded-3xl border border-white/10 bg-white/[0.07] p-8 shadow-2xl backdrop-blur-xl">
+          <div className="mb-6 text-center">
+            <h2 className="text-xl font-bold text-white">
+              {isSignUp ? "Create Account" : "Welcome Back"}
+            </h2>
+            <p className="mt-1 text-sm text-white/50">
+              {isSignUp
+                ? "Start your IELTS preparation journey"
+                : "Sign in to continue practicing"}
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {isSignUp && (
+              <div>
+                <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/50">
+                  Full Name
+                </label>
+                <div className="relative">
+                  <UserPlus className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your full name"
+                    className="w-full rounded-xl border border-white/10 bg-white/[0.06] py-3 pl-11 pr-4 text-sm font-medium text-white outline-none transition placeholder:text-white/25 focus:border-primary/50 focus:bg-white/[0.1] focus:ring-1 focus:ring-primary/30"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/50">
+                Email Address
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.06] py-3 pl-11 pr-4 text-sm font-medium text-white outline-none transition placeholder:text-white/25 focus:border-primary/50 focus:bg-white/[0.1] focus:ring-1 focus:ring-primary/30"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-white/50">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/30" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.06] py-3 pl-11 pr-12 text-sm font-medium text-white outline-none transition placeholder:text-white/25 focus:border-primary/50 focus:bg-white/[0.1] focus:ring-1 focus:ring-primary/30"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/30 transition hover:text-white/60"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" />
+                  ) : (
+                    <Eye className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {!isSignUp && (
+              <div className="flex items-center justify-between text-sm">
+                <label className="flex items-center gap-2 text-white/50">
+                  <input
+                    type="checkbox"
+                    className="h-3.5 w-3.5 rounded border-white/20 bg-white/10"
+                  />
+                  Remember me
+                </label>
+                <button
+                  type="button"
+                  className="font-medium text-primary transition hover:text-primary-dark"
+                >
+                  Forgot password?
+                </button>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3.5 text-sm font-semibold text-white shadow-lg shadow-red-900/30 transition hover:bg-accent-dark"
             >
-              Start Reading Practice
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/ielts/listening"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-base font-semibold text-white transition hover:bg-white/20"
+              <LogIn className="h-4 w-4" />
+              {isSignUp ? "Create Account" : "Sign In"}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="my-6 flex items-center gap-3">
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-xs font-medium text-white/30">OR</span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          {/* Google / Guest */}
+          <div className="space-y-3">
+            <button
+              type="button"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 text-sm font-medium text-white/80 transition hover:bg-white/[0.08]"
             >
-              Try Listening Tests
+              <svg className="h-4 w-4" viewBox="0 0 24 24">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Continue with Google
+            </button>
+
+            <Link
+              href="/home"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 text-sm font-medium text-white/80 transition hover:bg-white/[0.08]"
+            >
+              Continue as Guest
             </Link>
           </div>
+
+          {/* Toggle Sign Up / Sign In */}
+          <p className="mt-6 text-center text-sm text-white/40">
+            {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
+            <button
+              type="button"
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="font-semibold text-primary transition hover:text-primary-dark"
+            >
+              {isSignUp ? "Sign In" : "Sign Up"}
+            </button>
+          </p>
         </div>
-      </section>
+
+        {/* Bottom text */}
+        <p className="mt-6 text-center text-xs text-white/30">
+          Free platform for IELTS General Training preparation
+        </p>
+      </div>
     </main>
   );
 }
