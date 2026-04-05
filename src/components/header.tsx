@@ -7,6 +7,7 @@ import {
   Calculator,
   FilePenLine,
   Headphones,
+  LogOut,
   Menu,
   NotebookPen,
   X,
@@ -57,6 +58,17 @@ export default function Header() {
           </Link>
           <button
             type="button"
+            onClick={() => {
+              window.localStorage.removeItem("ielts-pass-auth");
+              window.location.href = "/";
+            }}
+            className="hidden items-center gap-2 rounded-xl border border-gray-200 px-3.5 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50 sm:inline-flex"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </button>
+          <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
             className="rounded-xl p-2 text-gray-600 transition hover:bg-gray-50 lg:hidden"
           >
@@ -89,6 +101,17 @@ export default function Header() {
           >
             Start Practicing
           </Link>
+          <button
+            type="button"
+            onClick={() => {
+              window.localStorage.removeItem("ielts-pass-auth");
+              window.location.href = "/";
+            }}
+            className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </button>
         </div>
       )}
     </header>

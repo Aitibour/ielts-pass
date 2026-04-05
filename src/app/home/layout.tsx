@@ -1,5 +1,6 @@
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import AuthGuard from "@/components/auth-guard";
 
 export default function HomeLayout({
   children,
@@ -7,10 +8,10 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <AuthGuard>
       <Header />
       {children}
       <Footer />
-    </>
+    </AuthGuard>
   );
 }

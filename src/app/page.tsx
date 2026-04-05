@@ -11,10 +11,12 @@ export default function LoginPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    window.localStorage.setItem("ielts-pass-auth", "true");
     window.location.href = "/home";
   }
 
   function handleGoogle() {
+    window.localStorage.setItem("ielts-pass-auth", "true");
     window.location.href = "/home";
   }
 

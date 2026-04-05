@@ -119,9 +119,11 @@ export default function IeltsWritingPage() {
   const wordCount = countWords(essay);
 
   return (
-    <main className="flex-1 bg-[url('/bg-pattern.svg')] bg-cover bg-fixed bg-center bg-no-repeat">
+    <main className="relative flex-1">
+      <div className="fixed inset-0 -z-10 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
+      <div className="fixed inset-0 -z-10 bg-white/90" />
       {/* Page Header */}
-      <section className="border-b border-gray-200 bg-white/90 backdrop-blur">
+      <section className="border-b border-gray-200 bg-white/80 backdrop-blur">
         <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
           <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
             <Link

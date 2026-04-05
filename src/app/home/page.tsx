@@ -112,7 +112,8 @@ export default function HomePage() {
     <main className="flex-1">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/bg-hero.svg')" }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
+        <div className="absolute inset-0 bg-navy/80" />
         <div className="relative mx-auto max-w-7xl px-4 py-24 lg:px-8 lg:py-36">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur">
@@ -171,8 +172,10 @@ export default function HomePage() {
       </section>
 
       {/* Practice Modules */}
-      <section className="relative bg-gray-50 bg-[url('/bg-pattern.svg')] bg-cover bg-center bg-no-repeat py-20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+      <section className="relative py-20">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
+        <div className="absolute inset-0 bg-white/90" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               <BookOpen className="h-3.5 w-3.5" />
@@ -224,8 +227,10 @@ export default function HomePage() {
       </section>
 
       {/* Features Grid */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+      <section className="relative py-20">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
+        <div className="absolute inset-0 bg-gray-50/95" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
               <Zap className="h-3.5 w-3.5" />
@@ -258,8 +263,10 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/bg-cta.svg')" }}>
-        <div className="mx-auto max-w-7xl px-4 py-20 text-center lg:px-8">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
+        <div className="absolute inset-0 bg-navy/85" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 text-center lg:px-8">
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Ready to Start Preparing?
           </h2>
