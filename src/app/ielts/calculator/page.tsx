@@ -9,6 +9,7 @@ import {
   FileText,
   MessageSquareQuote,
   Mic2,
+  TrendingUp,
 } from "lucide-react";
 import {
   calculateListeningBand,
@@ -83,70 +84,76 @@ export default function IeltsCalculatorPage() {
   );
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,_#fffaf5_0%,_#f8fafc_45%,_#f0fdf4_100%)]">
-      <section className="border-b border-orange-100/80 bg-white/80 backdrop-blur">
-        <div className="mx-auto max-w-6xl px-4 py-8">
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
+    <main className="flex-1 bg-gray-50">
+      {/* Page Header */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-8 lg:px-8">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
             <Link
-              href="/ielts"
-              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-1.5 font-medium text-slate-700 hover:bg-slate-50"
+              href="/"
+              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-1.5 font-medium text-gray-700 transition hover:bg-gray-50"
             >
               <ArrowLeft className="h-4 w-4" />
-              Back to IELTS
+              Home
             </Link>
-            <span>Band score calculator</span>
+            <span>/</span>
+            <span className="font-medium text-navy">Score Calculator</span>
           </div>
 
-          <div className="mt-5 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-orange-700">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
                 <Calculator className="h-3.5 w-3.5" />
-                General IELTS Score Calculator
+                Band Score Calculator
               </div>
-              <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
-                General Listening, Reading, Writing, Speaking
+              <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+                IELTS Overall Band Calculator
               </h1>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-                Enter General Listening and General Reading correct answers out of 40,
-                then add Writing and Speaking band scores. The overall band is the
-                average of the 4 modules rounded to the nearest whole or half band.
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-500">
+                Enter General Listening and Reading correct answers (out of 40), plus
+                Writing and Speaking band scores. The overall band is rounded to the
+                nearest whole or half band.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              <div className="rounded-3xl bg-slate-950 px-4 py-4 text-white">
-                <div className="text-xs uppercase tracking-[0.2em] text-white/60">
+              <div className="rounded-2xl bg-navy px-4 py-4 text-white shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
                   Listening
                 </div>
-                <div className="mt-1 text-2xl font-black">{listeningBand.toFixed(1)}</div>
+                <div className="mt-1 text-2xl font-extrabold">{listeningBand.toFixed(1)}</div>
               </div>
-              <div className="rounded-3xl bg-white px-4 py-4 ring-1 ring-orange-100 shadow-lg shadow-orange-100/60">
-                <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
+              <div className="rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">
                   Reading
                 </div>
-                <div className="mt-1 text-2xl font-black text-slate-900">
+                <div className="mt-1 text-2xl font-extrabold text-gray-900">
                   {readingBand.toFixed(1)}
                 </div>
               </div>
-              <div className="rounded-3xl bg-emerald-500 px-4 py-4 text-white shadow-lg shadow-emerald-200/80">
-                <div className="text-xs uppercase tracking-[0.2em] text-white/70">
+              <div className="rounded-2xl bg-ielts-green px-4 py-4 text-white shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
                   Overall
                 </div>
-                <div className="mt-1 text-2xl font-black">{overall.overall.toFixed(1)}</div>
+                <div className="mt-1 text-2xl font-extrabold">{overall.overall.toFixed(1)}</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-6">
+      {/* Calculator Grid */}
+      <section className="mx-auto max-w-6xl px-4 py-8 lg:px-8">
         <div className="grid gap-5 lg:grid-cols-2">
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/60">
-            <div className="flex items-center gap-2 text-lg font-bold text-slate-900">
-              <Ear className="h-5 w-5 text-orange-500" />
+          {/* Listening */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
+            <div className="flex items-center gap-2.5 text-base font-bold text-gray-900">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ielts-listening text-white">
+                <Ear className="h-5 w-5" />
+              </div>
               Listening
             </div>
-            <label className="mt-4 block text-sm font-medium text-slate-700">
+            <label className="mt-4 block text-sm font-medium text-gray-700">
               Correct Answers (0-40)
             </label>
             <input
@@ -155,19 +162,22 @@ export default function IeltsCalculatorPage() {
               max="40"
               value={listeningCorrect}
               onChange={(event) => setListeningCorrect(event.target.value)}
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none focus:border-orange-300 focus:bg-white"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-semibold text-gray-900 outline-none transition focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary"
             />
-            <div className="mt-4 rounded-2xl bg-orange-50 px-4 py-3 text-sm font-medium text-orange-800">
-              Listening band score: {listeningBand.toFixed(1)}
+            <div className="mt-4 rounded-xl bg-purple-50 px-4 py-3 text-sm font-semibold text-ielts-listening">
+              Band: {listeningBand.toFixed(1)}
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/60">
-            <div className="flex items-center gap-2 text-lg font-bold text-slate-900">
-              <FileText className="h-5 w-5 text-orange-500" />
+          {/* Reading */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
+            <div className="flex items-center gap-2.5 text-base font-bold text-gray-900">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+                <FileText className="h-5 w-5" />
+              </div>
               General Reading
             </div>
-            <label className="mt-4 block text-sm font-medium text-slate-700">
+            <label className="mt-4 block text-sm font-medium text-gray-700">
               Correct Answers (0-40)
             </label>
             <input
@@ -176,24 +186,27 @@ export default function IeltsCalculatorPage() {
               max="40"
               value={readingCorrect}
               onChange={(event) => setReadingCorrect(event.target.value)}
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none focus:border-orange-300 focus:bg-white"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-semibold text-gray-900 outline-none transition focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary"
             />
-            <div className="mt-4 rounded-2xl bg-orange-50 px-4 py-3 text-sm font-medium text-orange-800">
-              Reading band score: {readingBand.toFixed(1)}
+            <div className="mt-4 rounded-xl bg-primary-light px-4 py-3 text-sm font-semibold text-primary">
+              Band: {readingBand.toFixed(1)}
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/60">
-            <div className="flex items-center gap-2 text-lg font-bold text-slate-900">
-              <MessageSquareQuote className="h-5 w-5 text-orange-500" />
+          {/* Writing */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
+            <div className="flex items-center gap-2.5 text-base font-bold text-gray-900">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-white">
+                <MessageSquareQuote className="h-5 w-5" />
+              </div>
               Writing
             </div>
-            <div className="mt-4 rounded-2xl bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-600">
-              Saved Task 1 band: {task1Band !== null ? task1Band.toFixed(1) : "--"}
-              <br />
-              Saved Task 2 band: {task2Band !== null ? task2Band.toFixed(1) : "--"}
+            <div className="mt-4 rounded-xl bg-gray-50 px-4 py-3 text-sm leading-6 text-gray-600">
+              Saved Task 1: <span className="font-semibold">{task1Band !== null ? task1Band.toFixed(1) : "--"}</span>
+              <span className="mx-2 text-gray-300">|</span>
+              Saved Task 2: <span className="font-semibold">{task2Band !== null ? task2Band.toFixed(1) : "--"}</span>
             </div>
-            <label className="mt-4 block text-sm font-medium text-slate-700">
+            <label className="mt-4 block text-sm font-medium text-gray-700">
               Band Score
             </label>
             <input
@@ -209,16 +222,19 @@ export default function IeltsCalculatorPage() {
                   writingTask2Band: task2Band,
                 });
               }}
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none focus:border-orange-300 focus:bg-white"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-semibold text-gray-900 outline-none transition focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary"
             />
           </div>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/60">
-            <div className="flex items-center gap-2 text-lg font-bold text-slate-900">
-              <Mic2 className="h-5 w-5 text-orange-500" />
+          {/* Speaking */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
+            <div className="flex items-center gap-2.5 text-base font-bold text-gray-900">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ielts-green text-white">
+                <Mic2 className="h-5 w-5" />
+              </div>
               Speaking
             </div>
-            <label className="mt-4 block text-sm font-medium text-slate-700">
+            <label className="mt-4 block text-sm font-medium text-gray-700">
               Band Score
             </label>
             <input
@@ -233,39 +249,42 @@ export default function IeltsCalculatorPage() {
                   speakingBand: Math.max(0, Math.min(9, Number(event.target.value) || 0)),
                 });
               }}
-              className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-lg font-semibold text-slate-900 outline-none focus:border-orange-300 focus:bg-white"
+              className="mt-2 w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-lg font-semibold text-gray-900 outline-none transition focus:border-primary focus:bg-white focus:ring-1 focus:ring-primary"
             />
           </div>
         </div>
 
-        <div className="mt-5 rounded-[2rem] border border-emerald-100 bg-white p-6 shadow-xl shadow-emerald-100/60">
-          <div className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-700">
-            Result
-          </div>
-          <div className="mt-3 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-3xl bg-slate-950 p-5 text-white">
-              <div className="text-xs uppercase tracking-[0.18em] text-white/55">
-                Average
-              </div>
-              <div className="mt-2 text-4xl font-black">
-                {overall.average.toFixed(2)}
-              </div>
+        {/* Overall Result */}
+        <div className="mt-6 overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-card-lg">
+          <div className="gradient-navy p-8">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/50">
+              <TrendingUp className="h-4 w-4" />
+              Overall Result
             </div>
-            <div className="rounded-3xl bg-emerald-500 p-5 text-white">
-              <div className="text-xs uppercase tracking-[0.18em] text-white/70">
-                Overall Band
+            <div className="mt-4 grid gap-5 sm:grid-cols-3">
+              <div className="rounded-2xl bg-white/10 p-5 backdrop-blur">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+                  Average
+                </div>
+                <div className="mt-2 text-4xl font-extrabold text-white">
+                  {overall.average.toFixed(2)}
+                </div>
               </div>
-              <div className="mt-2 text-4xl font-black">
-                {overall.overall.toFixed(1)}
+              <div className="rounded-2xl bg-ielts-green p-5">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
+                  Overall Band
+                </div>
+                <div className="mt-2 text-4xl font-extrabold text-white">
+                  {overall.overall.toFixed(1)}
+                </div>
               </div>
-            </div>
-            <div className="rounded-3xl bg-orange-50 p-5 text-orange-900">
-              <div className="text-xs uppercase tracking-[0.18em] text-orange-700/70">
-                Rule Used
-              </div>
-              <div className="mt-2 text-sm leading-6">
-                Overall band = average of Listening, Reading, Writing, and Speaking,
-                rounded to the nearest whole or half band.
+              <div className="rounded-2xl bg-white/10 p-5 backdrop-blur">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/50">
+                  Calculation
+                </div>
+                <div className="mt-2 text-sm leading-6 text-white/70">
+                  Average of all 4 modules, rounded to nearest whole or half band.
+                </div>
               </div>
             </div>
           </div>

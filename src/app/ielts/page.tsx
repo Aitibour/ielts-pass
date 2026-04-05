@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
   AlarmClock,
+  ArrowLeft,
   BookOpen,
   Calculator,
   CheckCircle2,
@@ -12,7 +13,6 @@ import {
   FileText,
   FilePenLine,
   RotateCcw,
-  TimerReset,
 } from "lucide-react";
 import {
   calculateGeneralReadingBand,
@@ -141,67 +141,83 @@ export default function IeltsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#fff7ed,_#ffedd5_35%,_#f8fafc_75%)]">
-      <section className="border-b border-orange-100/80 bg-white/70 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-orange-700">
-              <BookOpen className="h-3.5 w-3.5" />
-              General IELTS Simulator
-            </div>
-            <h1 className="text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
-              {test.title}
-            </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-              Practice with a real reading paper from {test.sourceLabel}. The page
-              includes a 60-minute timer, 40 answer boxes, and instant raw-score
-              plus IELTS band calculation.
-            </p>
+    <main className="flex-1 bg-gray-50">
+      {/* Page Header */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-8 lg:px-8">
+          <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-3 py-1.5 font-medium text-gray-700 transition hover:bg-gray-50"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Home
+            </Link>
+            <span>/</span>
+            <span className="font-medium text-navy">Reading Simulator</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div className="rounded-3xl bg-slate-950 px-4 py-4 text-white shadow-xl shadow-slate-950/10">
-              <div className="text-xs uppercase tracking-[0.2em] text-white/60">
-                Time Left
+          <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                <BookOpen className="h-3.5 w-3.5" />
+                General Reading
               </div>
-              <div className="mt-1 text-2xl font-black">{formatTime(timeLeft)}</div>
+              <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+                {test.title}
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-500">
+                Practice with a real reading paper from {test.sourceLabel}. The page
+                includes a 60-minute timer, 40 answer boxes, and instant raw-score
+                plus IELTS band calculation.
+              </p>
             </div>
-            <div className="rounded-3xl bg-white px-4 py-4 shadow-lg shadow-orange-100/60 ring-1 ring-orange-100">
-              <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Answered
+
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="rounded-2xl bg-navy px-4 py-4 text-white shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                  Time Left
+                </div>
+                <div className="mt-1 text-2xl font-extrabold">{formatTime(timeLeft)}</div>
               </div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
-                {answeredCount}/40
+              <div className="rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+                  Answered
+                </div>
+                <div className="mt-1 text-2xl font-extrabold text-gray-900">
+                  {answeredCount}/40
+                </div>
               </div>
-            </div>
-            <div className="rounded-3xl bg-white px-4 py-4 shadow-lg shadow-orange-100/60 ring-1 ring-orange-100">
-              <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                Score
+              <div className="rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+                  Score
+                </div>
+                <div className="mt-1 text-2xl font-extrabold text-gray-900">
+                  {isSubmitted ? `${score}/40` : "--"}
+                </div>
               </div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
-                {isSubmitted ? `${score}/40` : "--"}
-              </div>
-            </div>
-            <div className="rounded-3xl bg-white px-4 py-4 shadow-lg shadow-orange-100/60 ring-1 ring-orange-100">
-              <div className="text-xs uppercase tracking-[0.2em] text-slate-400">
-                IELTS Band
-              </div>
-              <div className="mt-1 text-2xl font-black text-slate-900">
-                {isSubmitted ? band.toFixed(1) : "--"}
+              <div className="rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-card">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+                  Band
+                </div>
+                <div className="mt-1 text-2xl font-extrabold text-gray-900">
+                  {isSubmitted ? band.toFixed(1) : "--"}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.9fr)]">
-        <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-200/50">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
+      {/* Main Content */}
+      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(360px,0.9fr)] lg:px-8">
+        {/* PDF Viewer */}
+        <div className="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-card">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 px-6 py-4">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Reading Paper</h2>
-              <p className="text-sm text-slate-500">
-                Use the embedded PDF or open the source directly if your browser blocks
-                cross-site previews.
+              <h2 className="text-base font-bold text-gray-900">Reading Paper</h2>
+              <p className="text-sm text-gray-400">
+                Embedded PDF or open the source directly.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -209,7 +225,7 @@ export default function IeltsPage() {
                 href={test.questionPdfUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600"
+                className="inline-flex items-center gap-2 rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark"
               >
                 <FileText className="h-4 w-4" />
                 Open PDF
@@ -218,28 +234,30 @@ export default function IeltsPage() {
                 href={test.articleUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
               >
                 <ExternalLink className="h-4 w-4" />
-                Open Article
+                Source
               </a>
             </div>
           </div>
           <iframe
             title={test.title}
             src={test.questionPdfUrl}
-            className="h-[70vh] w-full bg-slate-50"
+            className="h-[70vh] w-full bg-gray-50"
           />
         </div>
 
+        {/* Sidebar */}
         <div className="space-y-5">
-          <div className="rounded-[2rem] border border-orange-100 bg-white p-5 shadow-xl shadow-orange-100/50">
+          {/* Controls */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
             <div className="flex flex-wrap items-center gap-3">
               <button
                 type="button"
                 onClick={() => setIsRunning((current) => !current)}
                 disabled={isSubmitted || timeLeft === 0}
-                className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300"
+                className="inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy-deep disabled:cursor-not-allowed disabled:bg-gray-300"
               >
                 <AlarmClock className="h-4 w-4" />
                 {isRunning ? "Pause Timer" : "Start Timer"}
@@ -247,113 +265,99 @@ export default function IeltsPage() {
               <button
                 type="button"
                 onClick={() => setIsSubmitted(true)}
-                className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-600"
+                className="inline-flex items-center gap-2 rounded-xl bg-ielts-green px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-emerald-700"
               >
                 <CheckCircle2 className="h-4 w-4" />
-                Submit Answers
+                Submit
               </button>
               <button
                 type="button"
                 onClick={resetExam}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
               >
                 <RotateCcw className="h-4 w-4" />
                 Reset
               </button>
             </div>
 
+            {/* Quick links */}
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-3xl bg-orange-50 p-4">
-                <div className="flex items-center gap-2 text-sm font-semibold text-orange-900">
-                  <TimerReset className="h-4 w-4" />
+              <div className="rounded-2xl bg-primary-light p-4">
+                <div className="text-xs font-semibold uppercase tracking-wider text-primary">
                   Test format
                 </div>
-                <p className="mt-2 text-sm leading-6 text-orange-900/75">
-                  40 questions, 60 minutes, auto-save in this browser, and
-                  instant marking when you submit.
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  40 questions, 60 minutes, auto-save, instant marking.
                 </p>
               </div>
-              <div className="rounded-3xl bg-slate-50 p-4">
-                <div className="text-sm font-semibold text-slate-900">Source links</div>
-                <div className="mt-2 space-y-2 text-sm text-slate-600">
-                  <Link
-                    href="/ielts/writing"
-                    className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 transition hover:bg-slate-100"
-                  >
-                    Writing practice
-                    <FilePenLine className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/ielts/writing/task-2"
-                    className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 transition hover:bg-slate-100"
-                  >
-                    Writing Task 2
-                    <FilePenLine className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/ielts/listening"
-                    className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 transition hover:bg-slate-100"
-                  >
-                    Listening tests
-                    <Headphones className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/ielts/calculator"
-                    className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 transition hover:bg-slate-100"
-                  >
-                    Score calculator
-                    <Calculator className="h-4 w-4" />
-                  </Link>
-                  <a
-                    href={test.answersPdfUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 transition hover:bg-slate-100"
-                  >
-                    Answer key PDF
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                  <Link
-                    href="/"
-                    className="flex items-center justify-between rounded-2xl bg-white px-3 py-2 transition hover:bg-slate-100"
-                  >
-                    Back to home
-                    <ExternalLink className="h-4 w-4" />
-                  </Link>
+              <div className="space-y-2 rounded-2xl bg-gray-50 p-4">
+                <div className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  Navigate
                 </div>
+                <Link
+                  href="/ielts/writing"
+                  className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  Writing practice
+                  <FilePenLine className="h-4 w-4 text-gray-400" />
+                </Link>
+                <Link
+                  href="/ielts/listening"
+                  className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  Listening tests
+                  <Headphones className="h-4 w-4 text-gray-400" />
+                </Link>
+                <Link
+                  href="/ielts/calculator"
+                  className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  Score calculator
+                  <Calculator className="h-4 w-4 text-gray-400" />
+                </Link>
+                <a
+                  href={test.answersPdfUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between rounded-xl bg-white px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-100"
+                >
+                  Answer key PDF
+                  <ExternalLink className="h-4 w-4 text-gray-400" />
+                </a>
               </div>
             </div>
 
+            {/* Results */}
             {isSubmitted ? (
-              <div className="mt-5 rounded-[1.75rem] bg-slate-950 p-5 text-white">
-                <div className="text-sm uppercase tracking-[0.2em] text-white/50">
+              <div className="mt-5 rounded-2xl bg-navy p-6 text-white">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
                   Result
                 </div>
-                <div className="mt-2 flex flex-wrap items-end gap-4">
+                <div className="mt-3 flex flex-wrap items-end gap-6">
                   <div>
-                    <div className="text-4xl font-black">{score}/40</div>
-                    <div className="text-sm text-white/65">Raw correct answers</div>
+                    <div className="text-4xl font-extrabold">{score}/40</div>
+                    <div className="mt-1 text-sm text-white/60">Raw score</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-black">{band.toFixed(1)}</div>
-                    <div className="text-sm text-white/65">Estimated IELTS band</div>
+                    <div className="text-4xl font-extrabold">{band.toFixed(1)}</div>
+                    <div className="mt-1 text-sm text-white/60">IELTS Band</div>
                   </div>
                 </div>
-                {savedScore ? (
-                  <div className="mt-4 text-sm text-white/70">
+                {savedScore && (
+                  <div className="mt-4 text-sm text-white/60">
                     Saved to the General IELTS calculator.
                   </div>
-                ) : null}
+                )}
               </div>
             ) : null}
           </div>
 
-          <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-xl shadow-slate-200/50">
-            <div className="mb-4">
-              <h2 className="text-lg font-bold text-slate-900">Answer Sheet</h2>
-              <p className="text-sm text-slate-500">
-                Enter letters, words, or short phrases exactly as you see them in the
-                test.
+          {/* Answer Sheet */}
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-card">
+            <div className="mb-5">
+              <h2 className="text-base font-bold text-gray-900">Answer Sheet</h2>
+              <p className="mt-1 text-sm text-gray-400">
+                Enter answers exactly as they appear in the test.
               </p>
             </div>
 
@@ -365,27 +369,27 @@ export default function IeltsPage() {
                 return (
                   <label
                     key={index}
-                    className={`rounded-3xl border p-3 transition ${
+                    className={`rounded-2xl border p-3 transition ${
                       showState
                         ? correct
                           ? "border-emerald-200 bg-emerald-50"
-                          : "border-rose-200 bg-rose-50"
-                        : "border-slate-200 bg-slate-50"
+                          : "border-red-200 bg-red-50"
+                        : "border-gray-200 bg-gray-50"
                     }`}
                   >
-                    <div className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                    <div className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
                       Q{index + 1}
                     </div>
                     <input
                       value={answer}
                       onChange={(event) => updateAnswer(index, event.target.value)}
                       disabled={isSubmitted}
-                      className="w-full border-none bg-transparent text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-300 disabled:cursor-not-allowed"
-                      placeholder="Your answer"
+                      className="w-full border-none bg-transparent text-sm font-semibold text-gray-900 outline-none placeholder:text-gray-300 disabled:cursor-not-allowed"
+                      placeholder="..."
                     />
                     {isSubmitted ? (
-                      <div className="mt-2 text-xs leading-5 text-slate-500">
-                        Accepts: {test.answerKey[index].join(" / ")}
+                      <div className="mt-2 text-xs leading-5 text-gray-500">
+                        {test.answerKey[index].join(" / ")}
                       </div>
                     ) : null}
                   </label>

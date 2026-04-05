@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-primary: #046bd2;
+  --color-primary-dark: #045cb4;
+  --color-accent: #C8102F;
+  --color-accent-dark: #8E0B21;
+  --color-navy: #012269;
+  --color-navy-deep: #011F65;
+  --color-green: #0A8C51;
+  --color-text: #1F2937;
+  --color-text-light: #6B7280;
+  --color-bg: #FFFFFF;
+  --color-bg-subtle: #F9FAFB;
+  --color-bg-red: #FEF2F2;
+  --color-bg-blue: #EFF6FF;
+  --color-border: #E5E7EB;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--color-text);
+  line-height: 1.65;
+}
+
+/* GoIELTS-style gradient backgrounds */
+.gradient-navy {
+  background: linear-gradient(135deg, #012269 0%, #001a4d 100%);
+}
+
+.gradient-red {
+  background: linear-gradient(135deg, #c80f2e 0%, #a00d25 100%);
+}
+
+.gradient-green-navy {
+  background: linear-gradient(180deg, #0A8C51 0%, #022569 100%);
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg, #012269 0%, #046bd2 50%, #0A8C51 100%);
+}
