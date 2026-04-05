@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Award,
@@ -15,6 +16,13 @@ import {
   TrendingUp,
   Zap,
 } from "lucide-react";
+
+const heroSlides = [
+  "/bg-login.jpg",
+  "/bg-slide1.jpg",
+  "/bg-slide2.jpg",
+  "/bg-slide3.jpg",
+];
 
 const modules = [
   {
@@ -108,12 +116,45 @@ const features = [
 ];
 
 export default function HomePage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <main className="flex-1">
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
-        <div className="absolute inset-0 bg-navy/80" />
+        {/* Sliding backgrounds */}
+        {heroSlides.map((src, i) => (
+          <div
+            key={src}
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+            style={{
+              backgroundImage: `url('${src}')`,
+              opacity: i === currentSlide ? 1 : 0,
+            }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-navy/75" />
+
+        {/* Slide indicators */}
+        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setCurrentSlide(i)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                i === currentSlide ? "w-8 bg-white" : "w-2 bg-white/40"
+              }`}
+            />
+          ))}
+        </div>
         <div className="relative mx-auto max-w-7xl px-4 py-24 lg:px-8 lg:py-36">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur">
