@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BookOpen, Eye, EyeOff, LogIn, UserPlus, Loader2 } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { auth } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,11 +16,10 @@ export default function LoginPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        router.replace("/home");
-      }
-    });
+    const user = auth.currentUser();
+    if (user) {
+      router.replace("/home");
+    }
   }, [router]);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -29,46 +28,29 @@ export default function LoginPage() {
     setError("");
     setMessage("");
 
-    if (isSignUp) {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
-      });
-
-      if (signUpError) {
-        setError(signUpError.message);
-      } else {
+    try {
+      if (isSignUp) {
+        await auth.signup(email, password);
         setMessage("Check your email for a verification link to complete sign up.");
-      }
-    } else {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (signInError) {
-        setError(signInError.message);
       } else {
+        await auth.login(email, password, true);
         router.replace("/home");
       }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Something went wrong";
+      setError(msg);
     }
 
     setLoading(false);
   }
 
   async function handleGoogle() {
-    const { error: googleError } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
-
-    if (googleError) {
-      setError(googleError.message);
+    try {
+      const url = auth.loginExternalUrl("google");
+      window.location.href = url;
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Google login failed";
+      setError(msg);
     }
   }
 

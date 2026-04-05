@@ -2,44 +2,51 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { auth } from "@/lib/auth";
 import { Loader2 } from "lucide-react";
 
 export default function AuthCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN") {
-        router.replace("/home");
-      }
-    });
-
-    // Handle the hash fragment from email confirmation
     const hash = window.location.hash;
-    if (hash) {
-      const params = new URLSearchParams(hash.substring(1));
-      const accessToken = params.get("access_token");
-      const refreshToken = params.get("refresh_token");
 
-      if (accessToken && refreshToken) {
-        supabase.auth
-          .setSession({ access_token: accessToken, refresh_token: refreshToken })
+    if (hash) {
+      // Netlify Identity returns tokens in the hash fragment
+      // after email confirmation or external provider login
+      const params = new URLSearchParams(hash.substring(1));
+      const confirmationToken = params.get("confirmation_token");
+      const accessToken = params.get("access_token");
+
+      if (confirmationToken) {
+        auth
+          .confirm(confirmationToken, true)
           .then(() => {
             router.replace("/home");
+          })
+          .catch(() => {
+            router.replace("/");
           });
         return;
+      }
+
+      if (accessToken) {
+        // External provider callback - user is already logged in via GoTrue
+        const user = auth.currentUser();
+        if (user) {
+          router.replace("/home");
+          return;
+        }
       }
     }
 
     // Fallback: check if already logged in
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) {
-        router.replace("/home");
-      } else {
-        router.replace("/");
-      }
-    });
+    const user = auth.currentUser();
+    if (user) {
+      router.replace("/home");
+    } else {
+      router.replace("/");
+    }
   }, [router]);
 
   return (

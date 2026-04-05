@@ -2,30 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { auth } from "@/lib/auth";
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (!data.session) {
-        router.replace("/");
-        return;
-      }
-      setChecked(true);
-    });
-
-    const { data: listener } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_OUT") {
-        router.replace("/");
-      }
-    });
-
-    return () => {
-      listener.subscription.unsubscribe();
-    };
+    const user = auth.currentUser();
+    if (!user) {
+      router.replace("/");
+      return;
+    }
+    setChecked(true);
   }, [router]);
 
   if (!checked) {
