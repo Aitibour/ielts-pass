@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 import {
   BookOpen,
   Calculator,
@@ -58,8 +59,8 @@ export default function Header() {
           </Link>
           <button
             type="button"
-            onClick={() => {
-              window.localStorage.removeItem("ielts-pass-auth");
+            onClick={async () => {
+              await supabase.auth.signOut();
               window.location.href = "/";
             }}
             className="hidden items-center gap-2 rounded-xl border border-gray-200 px-3.5 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50 sm:inline-flex"
@@ -103,8 +104,8 @@ export default function Header() {
           </Link>
           <button
             type="button"
-            onClick={() => {
-              window.localStorage.removeItem("ielts-pass-auth");
+            onClick={async () => {
+              await supabase.auth.signOut();
               window.location.href = "/";
             }}
             className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50"

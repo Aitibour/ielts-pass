@@ -187,122 +187,139 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Practice Modules */}
-      <section className="relative py-20">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
-        <div className="absolute inset-0 bg-white/90" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              <BookOpen className="h-3.5 w-3.5" />
-              Practice Modules
-            </div>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Everything You Need to Prepare
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-gray-500">
-              Five focused modules covering all IELTS General Training skills.
-              Each module includes real test materials, timers, and instant
-              results.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {modules.map((mod) => (
-              <Link
-                key={mod.href}
-                href={mod.href}
-                className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-7 shadow-card transition duration-300 hover:border-gray-300 hover:shadow-card-hover"
-              >
-                <div className="flex items-start justify-between">
-                  <div
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl ${mod.color} text-white shadow-lg`}
-                  >
-                    <mod.icon className="h-6 w-6" />
-                  </div>
-                  <span
-                    className={`rounded-full ${mod.lightBg} px-3 py-1 text-xs font-semibold text-gray-600`}
-                  >
-                    {mod.tag}
-                  </span>
-                </div>
-                <h3 className="mt-5 text-lg font-bold text-gray-900 group-hover:text-primary">
-                  {mod.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  {mod.description}
-                </p>
-                <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-primary opacity-0 transition group-hover:opacity-100">
+      {/* Practice Modules — Horizontal scroll cards */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <h2 className="text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
+            Practice Modules
+          </h2>
+          <p className="mt-2 text-sm text-gray-500">Choose a skill to start practicing</p>
+        </div>
+        <div className="mt-8 flex gap-5 overflow-x-auto px-4 pb-4 lg:px-8">
+          {modules.map((mod) => (
+            <Link
+              key={mod.href}
+              href={mod.href}
+              className="group relative flex-none w-72 overflow-hidden rounded-2xl shadow-card-lg transition hover:shadow-card-hover"
+            >
+              {/* Colored top bar */}
+              <div className={`${mod.color} px-6 py-5`}>
+                <mod.icon className="h-8 w-8 text-white/90" />
+                <h3 className="mt-3 text-lg font-bold text-white">{mod.title}</h3>
+              </div>
+              <div className="bg-white px-6 py-5">
+                <p className="text-sm leading-6 text-gray-500">{mod.description}</p>
+                <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-primary">
                   Start now
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="relative py-20">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
-        <div className="absolute inset-0 bg-gray-50/95" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-              <Zap className="h-3.5 w-3.5" />
-              Platform Features
+      {/* Stats banner */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-slide2.jpg')" }} />
+        <div className="absolute inset-0 bg-navy/85" />
+        <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-12 sm:grid-cols-4 lg:px-8">
+          {[
+            { value: "10+", label: "Practice Tests" },
+            { value: "16", label: "Writing Prompts" },
+            { value: "6", label: "Listening Tests" },
+            { value: "$0", label: "100% Free" },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-3xl font-extrabold text-white sm:text-4xl">{stat.value}</div>
+              <div className="mt-1 text-xs font-medium uppercase tracking-wider text-white/50">{stat.label}</div>
             </div>
-            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Built for Real IELTS Success
-            </h2>
-          </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
+      {/* Features — Alternating rows */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <h2 className="text-center text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
+            Why IELTS PASS?
+          </h2>
+          <div className="mt-10 space-y-4">
+            {features.map((feature, i) => (
               <div
                 key={feature.title}
-                className="rounded-3xl border border-gray-100 bg-gray-50 p-7 transition hover:border-gray-200 hover:bg-white hover:shadow-card"
+                className={`flex items-center gap-5 rounded-2xl p-5 transition hover:shadow-card ${
+                  i % 2 === 0 ? "bg-primary-light" : "bg-gray-50"
+                }`}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-white">
+                <div className={`flex h-12 w-12 flex-none items-center justify-center rounded-xl text-white ${
+                  i % 2 === 0 ? "bg-primary" : "bg-navy"
+                }`}>
                   <feature.icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 text-base font-bold text-gray-900">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  {feature.description}
-                </p>
+                <div>
+                  <h3 className="text-sm font-bold text-gray-900">{feature.title}</h3>
+                  <p className="mt-0.5 text-sm text-gray-500">{feature.description}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-login.jpg')" }} />
-        <div className="absolute inset-0 bg-navy/85" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 text-center lg:px-8">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Ready to Start Preparing?
+      {/* How it works — Steps */}
+      <section className="relative overflow-hidden py-16">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-slide3.jpg')" }} />
+        <div className="absolute inset-0 bg-white/95" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
+          <h2 className="text-center text-2xl font-extrabold tracking-tight text-navy sm:text-3xl">
+            How It Works
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-white/65">
-            Jump straight into practice with real IELTS General Training
-            materials. No sign-up required.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-10 grid gap-8 sm:grid-cols-3">
+            {[
+              { step: "01", title: "Pick a Module", desc: "Choose Reading, Listening, or Writing to practice." },
+              { step: "02", title: "Practice Timed", desc: "Start the timer and complete under real exam conditions." },
+              { step: "03", title: "Get Your Band", desc: "Submit and instantly see your raw score and IELTS band." },
+            ].map((item) => (
+              <div key={item.step} className="text-center">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent text-2xl font-extrabold text-white shadow-lg">
+                  {item.step}
+                </div>
+                <h3 className="mt-4 text-base font-bold text-gray-900">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-gray-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA — Full-width image banner */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/bg-slide1.jpg')" }} />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy/70" />
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-start gap-6 px-4 py-16 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div>
+            <h2 className="text-2xl font-extrabold text-white sm:text-3xl">
+              Ready to boost your IELTS score?
+            </h2>
+            <p className="mt-2 max-w-md text-sm leading-6 text-white/60">
+              Start practicing with real materials now. Track your progress across
+              all four modules.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
             <Link
               href="/ielts"
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-3.5 text-base font-semibold text-white shadow-lg transition hover:bg-accent-dark"
+              className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-accent-dark"
             >
-              Start Reading Practice
+              Start Now
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/ielts/listening"
-              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-base font-semibold text-white transition hover:bg-white/20"
+              href="/ielts/calculator"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/20"
             >
-              Try Listening Tests
+              Calculator
             </Link>
           </div>
         </div>

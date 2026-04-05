@@ -1,35 +1,85 @@
 "use client";
 
-import { useState } from "react";
-import { BookOpen, Eye, EyeOff, LogIn, UserPlus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { BookOpen, Eye, EyeOff, LogIn, UserPlus, Loader2 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) {
+        router.replace("/home");
+      }
+    });
+  }, [router]);
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    window.localStorage.setItem("ielts-pass-auth", "true");
-    window.location.href = "/home";
+    setLoading(true);
+    setError("");
+    setMessage("");
+
+    if (isSignUp) {
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (signUpError) {
+        setError(signUpError.message);
+      } else {
+        setMessage("Check your email for a verification link to complete sign up.");
+      }
+    } else {
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        setError(signInError.message);
+      } else {
+        router.replace("/home");
+      }
+    }
+
+    setLoading(false);
   }
 
-  function handleGoogle() {
-    window.localStorage.setItem("ielts-pass-auth", "true");
-    window.location.href = "/home";
+  async function handleGoogle() {
+    const { error: googleError } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+
+    if (googleError) {
+      setError(googleError.message);
+    }
   }
 
   return (
     <main className="relative flex min-h-screen">
-      {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/bg-login.jpg')" }}
       />
       <div className="absolute inset-0 bg-navy/70 backdrop-blur-[2px]" />
 
-      {/* Card */}
       <div className="relative z-10 m-auto w-full max-w-sm px-4">
         <div className="mb-6 text-center">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur">
@@ -45,7 +95,18 @@ export default function LoginPage() {
             {isSignUp ? "Create Account" : "Sign In"}
           </h2>
 
-          {/* Google button */}
+          {message && (
+            <div className="mb-4 rounded-xl bg-emerald-500/20 px-4 py-3 text-center text-sm font-medium text-emerald-300">
+              {message}
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-4 rounded-xl bg-red-500/20 px-4 py-3 text-center text-sm font-medium text-red-300">
+              {error}
+            </div>
+          )}
+
           <button
             type="button"
             onClick={handleGoogle}
@@ -79,6 +140,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
+              required
               className="w-full rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm text-white outline-none placeholder:text-white/30 focus:border-primary/50 focus:bg-white/[0.1]"
             />
             <div className="relative">
@@ -87,6 +149,8 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                required
+                minLength={6}
                 className="w-full rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 pr-11 text-sm text-white outline-none placeholder:text-white/30 focus:border-primary/50 focus:bg-white/[0.1]"
               />
               <button
@@ -100,9 +164,12 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white shadow-lg shadow-red-900/30 transition hover:bg-accent-dark"
+              disabled={loading}
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-semibold text-white shadow-lg shadow-red-900/30 transition hover:bg-accent-dark disabled:opacity-50"
             >
-              {isSignUp ? (
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : isSignUp ? (
                 <>
                   <UserPlus className="h-4 w-4" />
                   Create Account
@@ -120,7 +187,11 @@ export default function LoginPage() {
             {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
             <button
               type="button"
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+                setError("");
+                setMessage("");
+              }}
               className="font-semibold text-primary hover:text-primary-dark"
             >
               {isSignUp ? "Sign In" : "Create Account"}
