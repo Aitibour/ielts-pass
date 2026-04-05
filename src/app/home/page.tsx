@@ -22,6 +22,8 @@ const heroSlides = [
   "/bg-slide1.jpg",
   "/bg-slide2.jpg",
   "/bg-slide3.jpg",
+  "/bg-slide4.jpg",
+  "/bg-slide5.jpg",
 ];
 
 const modules = [
@@ -155,59 +157,32 @@ export default function HomePage() {
             />
           ))}
         </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-24 lg:px-8 lg:py-36">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur">
-              <Award className="h-4 w-4" />
-              Free IELTS General Training Platform
-            </div>
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+          <div className="max-w-2xl">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
               Ace Your IELTS
               <br />
               <span className="text-red-300">General Training</span> Exam
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-white/75">
-              Practice reading, listening, and writing with real test materials.
-              Timed exercises, instant marking, and band score calculation — all
-              completely free.
+            <p className="mt-4 max-w-lg text-base leading-7 text-white/70">
+              Practice with real test materials. Timed exercises, instant
+              marking, and band score calculation — completely free.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/ielts"
-                className="inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-red-900/30 transition hover:bg-accent-dark"
+                className="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-900/30 transition hover:bg-accent-dark"
               >
                 Start Practicing
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/ielts/calculator"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-7 py-3.5 text-base font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
               >
                 Score Calculator
               </Link>
             </div>
-          </div>
-
-          {/* Stats badges */}
-          <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:max-w-3xl">
-            {[
-              { label: "Practice Tests", value: "10+" },
-              { label: "Writing Prompts", value: "16" },
-              { label: "Listening Tests", value: "6" },
-              { label: "100% Free", value: "$0" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-2xl bg-white/10 px-5 py-4 backdrop-blur"
-              >
-                <div className="text-2xl font-extrabold text-white">
-                  {stat.value}
-                </div>
-                <div className="mt-1 text-xs font-medium uppercase tracking-wider text-white/60">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
