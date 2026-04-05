@@ -1,9 +1,6 @@
-import GoTrue, { User } from "gotrue-js";
+import { createClient } from "@supabase/supabase-js";
 
-const auth = new GoTrue({
-  APIUrl: "https://ielts-pass.netlify.app/.netlify/identity",
-  setCookie: false,
-});
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-export { auth };
-export type { User };
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

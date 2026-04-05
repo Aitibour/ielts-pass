@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { auth } from "@/lib/auth";
+import { supabase } from "@/lib/auth";
 import {
   BookOpen,
   Calculator,
@@ -25,14 +25,6 @@ const navItems = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  async function handleLogout() {
-    const user = auth.currentUser();
-    if (user) {
-      await user.logout();
-    }
-    window.location.href = "/";
-  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur">
@@ -67,7 +59,10 @@ export default function Header() {
           </Link>
           <button
             type="button"
-            onClick={handleLogout}
+            onClick={async () => {
+              await supabase.auth.signOut();
+              window.location.href = "/";
+            }}
             className="hidden items-center gap-2 rounded-xl border border-gray-200 px-3.5 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50 sm:inline-flex"
           >
             <LogOut className="h-4 w-4" />
@@ -109,7 +104,10 @@ export default function Header() {
           </Link>
           <button
             type="button"
-            onClick={handleLogout}
+            onClick={async () => {
+              await supabase.auth.signOut();
+              window.location.href = "/";
+            }}
             className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
           >
             <LogOut className="h-4 w-4" />
